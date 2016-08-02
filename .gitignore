@@ -1,0 +1,21 @@
+# Ignore NodeJS Modules
+node_modules
+
+# Ignore all logfiles and tempfiles.
+*~
+*.log
+
+#Ignore RubyMine Stuff
+.idea/
+
+#Ignore local environment config vars (like the ones in heroku)
+.env
+
+#Ignore more weird stuff
+*.out
+.yo-rc.json
+*.jshintrc
+*.jshintignore
+.editorconfig
+.ruby-version
+
