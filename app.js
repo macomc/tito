@@ -7,8 +7,18 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var pg = require('pg');
 
+// Database string connection
+var pg_string_con = process.env.DATABASE_URL || ('postgresql://' + (process.env.PG_USER ) + ':' + (process.env.PG_PWD) + '@' + (process.env.PG_SERVER ) + '/' + (process.env.PG_DB ));
 var app = express();
+
+// Make our db accessible to our router
+app.use(function(req,res,next){
+  req.pg = pg;
+  req.db_string_con = pg_string_con;
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,6 +55,13 @@ if (app.get('env') === 'development') {
     });
   });
 }
+
+// Configuring jade
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+// Configure static public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // production error handler
 // no stacktraces leaked to user

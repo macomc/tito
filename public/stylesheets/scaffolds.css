@@ -1,0 +1,507 @@
+div#footer {
+  margin-top: 1em;
+  padding: 1em;
+  background-color: black;
+  color: white; }
+
+.button-group {
+  margin-bottom: 0; }
+  .button-group a.button {
+    padding: 0.641em 0.883em; }
+    .button-group a.button i {
+      font-size: 1rem; }
+
+/* Fix for unaligned form elements */
+[type='file'], [type='checkbox'], [type='radio'] {
+  margin: 0.9rem 0 0 0; }
+
+#user-bar .button {
+  margin-bottom: 0.2rem; }
+
+#user-bar #user-menu a {
+  padding-left: 0;
+  padding-right: 0; }
+
+i.large {
+  font-size: 25px; }
+
+i.x-large {
+  font-size: 36px; }
+
+i.xx-large {
+  font-size: 42px; }
+
+i.xxx-large {
+  font-size: 64px; }
+
+table .nested-label-col {
+  width: 240px !important;
+  text-align: right; }
+
+table .nested-actions {
+  width: 180px !important; }
+
+/*---------------------------------------*/
+/* Select 2 'Customize'                  */
+/*---------------------------------------*/
+.select2-container {
+  height: 2.4375rem;
+  padding: .5rem;
+  border: 1px solid #cacaca;
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: #0a0a0a;
+  background-color: #fefefe; }
+
+.select2-container--default .select2-selection--single {
+  border: 0; }
+
+/*---------------------------------------*/
+/* Alert Popup                           */
+/*---------------------------------------*/
+.fade-me-in {
+  display: none; }
+
+.page-content {
+  position: relative; }
+
+.pop-ups {
+  z-index: 10;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+/*---------------------------------------*/
+/* Cooler Notification                   */
+/*---------------------------------------*/
+.notification {
+  margin-left: -10px;
+  font-size: 10px; }
+
+.icon-flip-horizontal:before {
+  -webkit-transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  transform: scale(-1, 1); }
+
+/*---------------------------------------*/
+/* Topbar, Offbar and colors for apps    */
+/*---------------------------------------*/
+.title-bar {
+  text-align: center; }
+  .title-bar button {
+    line-height: inherit; }
+
+.title-bar-left {
+  text-align: left; }
+
+.title-bar-right {
+  text-align: right; }
+
+#app-tab-bar {
+  background-color: transparent;
+  padding-top: 0;
+  padding-bottom: 0; }
+  #app-tab-bar li {
+    text-align: center; }
+    #app-tab-bar li a {
+      color: #fefefe;
+      font-weight: bold; }
+      #app-tab-bar li a:hover i {
+        -webkit-transform: scale(1.5);
+        -moz-transform: scale(1.5);
+        -o-transform: scale(1.5);
+        transform: scale(1.5);
+        -webkit-transform-origin: center center;
+        -moz-transform-origin: center center;
+        -o-transform-origin: center center;
+        transform-origin: center center; }
+  #app-tab-bar #crm-app-tab {
+    background-color: #16907b; }
+
+#admin-app-bar {
+  background-color: #333; }
+  #admin-app-bar li {
+    background-color: #333; }
+    #admin-app-bar li.selected {
+      background-color: smart-scale(#333, 30%) !important; }
+    #admin-app-bar li a {
+      color: #fefefe; }
+    #admin-app-bar li.is-dropdown-submenu-parent.is-down-arrow > a::after {
+      border-color: #fefefe transparent transparent; }
+
+#access-control-app-bar {
+  background-color: #444; }
+  #access-control-app-bar li {
+    background-color: #444; }
+    #access-control-app-bar li.selected {
+      background-color: smart-scale(#444, 30%) !important; }
+    #access-control-app-bar li a {
+      color: #fefefe; }
+    #access-control-app-bar li.is-dropdown-submenu-parent.is-down-arrow > a::after {
+      border-color: #fefefe transparent transparent; }
+
+#settings-app-bar {
+  background-color: #555; }
+  #settings-app-bar li {
+    background-color: #555; }
+    #settings-app-bar li.selected {
+      background-color: smart-scale(#555, 30%) !important; }
+    #settings-app-bar li a {
+      color: #fefefe; }
+    #settings-app-bar li.is-dropdown-submenu-parent.is-down-arrow > a::after {
+      border-color: #fefefe transparent transparent; }
+
+#crm-app-bar {
+  background-color: #16907B; }
+  #crm-app-bar li {
+    background-color: #16907B; }
+    #crm-app-bar li.selected {
+      background-color: smart-scale(#16907B, 30%) !important; }
+    #crm-app-bar li a {
+      color: #fefefe; }
+    #crm-app-bar li.is-dropdown-submenu-parent.is-down-arrow > a::after {
+      border-color: #fefefe transparent transparent; }
+
+/*---------------------------------------*/
+/* Headers                               */
+/*---------------------------------------*/
+.h-header {
+  display: inline-block;
+  margin-right: 2rem; }
+
+/*---------------------------------------*/
+/* Header-actions                        */
+/*---------------------------------------*/
+.heading-actions {
+  display: inline-block; }
+
+/*---------------------------------------*/
+/* Scopes (table filter)                 */
+/*---------------------------------------*/
+.outter-scopes {
+  text-align: center; }
+
+.scopes {
+  display: inline-block;
+  margin-bottom: 1em; }
+  .scopes a:first-child {
+    border-radius: 1000px 0 0 1000px; }
+  .scopes a:last-child {
+    border-radius: 0 1000px 1000px  0; }
+  .scopes .selected {
+    background-color: #3c4890; }
+
+/*---------------------------------------*/
+/* off canvas                            */
+/*---------------------------------------*/
+.off-canvas .off-canvas-logo {
+  background-color: #fefefe;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  margin: 0; }
+
+.off-canvas #app-accordion-left .is-accordion-submenu-parent > a::after {
+  border-color: #fefefe transparent transparent; }
+
+.off-canvas #app-accordion-left li.app-accordion > a {
+  color: #fefefe;
+  font-weight: bold; }
+
+.off-canvas #app-accordion-left li#admin-app-accordion > a {
+  background-color: #333; }
+
+.off-canvas #app-accordion-left li#admin-app-accordion li.selected {
+  background-color: smart-scale(#333, 70%) !important; }
+
+.off-canvas #app-accordion-left li#access-control-app-accordion > a {
+  background-color: #444; }
+
+.off-canvas #app-accordion-left li#settings-app-accordion > a {
+  background-color: #555; }
+
+.off-canvas #app-accordion-right .is-accordion-submenu-parent > a::after {
+  border-color: #fefefe transparent transparent; }
+
+.off-canvas #app-accordion-right li.user-accordion > a {
+  color: #fefefe;
+  font-weight: bold; }
+
+.off-canvas #app-accordion-right #user-accordion > a {
+  background-color: #333; }
+
+.off-canvas #app-accordion-right #entities-accordion > a {
+  background-color: #333; }
+
+/*---------------------------------------*/
+/* Clickable Buttons                     */
+/*---------------------------------------*/
+div.right-fixed-div {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%); }
+  div.right-fixed-div div.jumping-div {
+    margin-left: 82%;
+    margin-right: -82%;
+    transition: .5s ease;
+    -webkit-transform-origin: right center;
+    -moz-transform-origin: right center;
+    -o-transform-origin: right center;
+    transform-origin: right center; }
+    div.right-fixed-div div.jumping-div button, div.right-fixed-div div.jumping-div a.button, div.right-fixed-div div.jumping-div input.button {
+      width: 224px;
+      text-align: left;
+      font-size: 16px; }
+      div.right-fixed-div div.jumping-div button i, div.right-fixed-div div.jumping-div a.button i, div.right-fixed-div div.jumping-div input.button i {
+        margin-right: 10px; }
+  div.right-fixed-div div.jumping-div:hover {
+    transition: .5s ease;
+    margin-left: 0%;
+    margin-right: 0%;
+    -webkit-transform-origin: right center;
+    -moz-transform-origin: right center;
+    -o-transform-origin: right center;
+    transform-origin: right center; }
+
+/*---------------------------------------*/
+/* datatables                            */
+/*---------------------------------------*/
+table.datatable .actions {
+  width: 130px !important; }
+
+table.datatable .actions-1 {
+  width: 55px !important; }
+
+table.datatable .actions-2 {
+  width: 90px !important; }
+
+table.datatable .actions-3 {
+  width: 125px !important; }
+
+table.datatable .actions-4 {
+  width: 160px !important; }
+
+table.datatable .actions-5 {
+  width: 195px !important; }
+
+table.datatable .actions-6 {
+  width: 230px !important; }
+
+table.datatable tbody tr.parent {
+  background-color: #AAA !important; }
+
+table.datatable tbody td.details-control {
+  background-color: #AAA !important;
+  background: url("/assets/details_open.png") no-repeat center center;
+  cursor: pointer; }
+
+table.datatable tbody tr.shown td.details-control {
+  background: url("/assets/details_close.png") no-repeat center center; }
+
+table.datatable tbody tr.notice {
+  background-color: #92aab7 !important; }
+
+div.fixedHeader {
+  z-index: 0 !important;
+  /* Needs to be here, otherwise the menu gets hidden behind it */ }
+  div.fixedHeader table.datatable {
+    margin: 0 !important;
+    /* remove unwanted 0.5em margin from jquery.dataTables.foundation.scss */ }
+
+/*---------------------------------------*/
+/* Better looking Form error             */
+/*---------------------------------------*/
+/* SCSS cant search backwards, so this is a nice little trick to be able to select the input */
+small.error-hidden {
+  display: none; }
+  small.error-hidden + input {
+    border-color: #A71007;
+    margin-bottom: 0px; }
+  small.error-hidden + textarea {
+    margin-bottom: 0px; }
+  small.error-hidden + select {
+    margin-bottom: 0px; }
+
+span.hint-hidden {
+  display: none; }
+  span.hint-hidden + input {
+    margin-bottom: 0px; }
+  span.hint-hidden + textarea {
+    margin-bottom: 0px; }
+  span.hint-hidden + select {
+    margin-bottom: 0px; }
+  span.hint-hidden + small.error {
+    margin-bottom: 0px; }
+
+small.error {
+  background-color: #A71007;
+  color: white;
+  display: block;
+  font-weight: bold;
+  padding-left: 16px;
+  margin-bottom: 16px; }
+
+span.hint {
+  color: #666;
+  display: block;
+  font-style: italic;
+  padding-left: 16px;
+  margin-bottom: 16px; }
+
+/*---------------------------------------*/
+/* _Forms and Show                       */
+/*---------------------------------------*/
+i.green {
+  color: green; }
+
+i.red {
+  color: red; }
+
+div.inline-form-elements {
+  display: inline-flex; }
+  div.inline-form-elements * {
+    margin-right: 10px; }
+  div.inline-form-elements *:last-child {
+    margin-right: 0; }
+  div.inline-form-elements label {
+    font-size: 20px;
+    font-weight: bold; }
+
+span.logo {
+  margin: 10px; }
+  span.logo img {
+    background-color: #cfd2d4;
+    padding: 10px;
+    border: 1px solid #AAA; }
+
+span.form-image img {
+  background-color: #cfd2d4;
+  padding: 10px;
+  border: 1px solid #AAA; }
+
+.grouped {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px; }
+  .grouped legend {
+    margin-left: 0.5em;
+    padding: 0 0.5em; }
+  .grouped .input legend {
+    margin-left: 0;
+    padding: 0; }
+
+table.print-grid-0 {
+  padding: 0;
+  border-width: 0px; }
+  table.print-grid-0, table.print-grid-0 thead, table.print-grid-0 tr, table.print-grid-0 th, table.print-grid-0 tbody, table.print-grid-0 td, table.print-grid-0 tfoot {
+    background-color: white;
+    border-color: black;
+    padding: 0; }
+  table.print-grid-0 thead, table.print-grid-0 tbody, table.print-grid-0 tfoot {
+    border-width: 0px; }
+  table.print-grid-0 th, table.print-grid-0 td {
+    padding: 6px;
+    border: 0px solid; }
+    table.print-grid-0 th input, table.print-grid-0 td input {
+      margin: 0px; }
+
+table.print-grid-1 {
+  padding: 0;
+  border-width: 1px; }
+  table.print-grid-1, table.print-grid-1 thead, table.print-grid-1 tr, table.print-grid-1 th, table.print-grid-1 tbody, table.print-grid-1 td, table.print-grid-1 tfoot {
+    background-color: white;
+    border-color: black;
+    padding: 0; }
+  table.print-grid-1 thead, table.print-grid-1 tbody, table.print-grid-1 tfoot {
+    border-width: 1px; }
+  table.print-grid-1 th, table.print-grid-1 td {
+    padding: 6px;
+    border: 1px solid; }
+    table.print-grid-1 th input, table.print-grid-1 td input {
+      margin: 0px; }
+
+table.print-grid-2 {
+  padding: 0;
+  border-width: 2px; }
+  table.print-grid-2, table.print-grid-2 thead, table.print-grid-2 tr, table.print-grid-2 th, table.print-grid-2 tbody, table.print-grid-2 td, table.print-grid-2 tfoot {
+    background-color: white;
+    border-color: black;
+    padding: 0; }
+  table.print-grid-2 thead, table.print-grid-2 tbody, table.print-grid-2 tfoot {
+    border-width: 2px; }
+  table.print-grid-2 th, table.print-grid-2 td {
+    padding: 6px;
+    border: 2px solid; }
+    table.print-grid-2 th input, table.print-grid-2 td input {
+      margin: 0px; }
+
+table.print-grid-3 {
+  padding: 0;
+  border-width: 3px; }
+  table.print-grid-3, table.print-grid-3 thead, table.print-grid-3 tr, table.print-grid-3 th, table.print-grid-3 tbody, table.print-grid-3 td, table.print-grid-3 tfoot {
+    background-color: white;
+    border-color: black;
+    padding: 0; }
+  table.print-grid-3 thead, table.print-grid-3 tbody, table.print-grid-3 tfoot {
+    border-width: 3px; }
+  table.print-grid-3 th, table.print-grid-3 td {
+    padding: 6px;
+    border: 3px solid; }
+    table.print-grid-3 th input, table.print-grid-3 td input {
+      margin: 0px; }
+
+table.print-grid-4 {
+  padding: 0;
+  border-width: 4px; }
+  table.print-grid-4, table.print-grid-4 thead, table.print-grid-4 tr, table.print-grid-4 th, table.print-grid-4 tbody, table.print-grid-4 td, table.print-grid-4 tfoot {
+    background-color: white;
+    border-color: black;
+    padding: 0; }
+  table.print-grid-4 thead, table.print-grid-4 tbody, table.print-grid-4 tfoot {
+    border-width: 4px; }
+  table.print-grid-4 th, table.print-grid-4 td {
+    padding: 6px;
+    border: 4px solid; }
+    table.print-grid-4 th input, table.print-grid-4 td input {
+      margin: 0px; }
+
+.template-size {
+  background-color: #888888 !important;
+  font-weight: bold; }
+  .template-size input {
+    width: auto;
+    margin-right: 4px !important;
+    display: inline-block; }
+
+.template-header {
+  background-color: #555555 !important; }
+
+div.row-header {
+  background-color: #4D5256;
+  color: white;
+  font-weight: bold; }
+
+div.row-odd {
+  background-color: smart-scale(#fefefe, 5%); }
+
+/*---------------------------------------*/
+/* D3 Graphs                             */
+/*---------------------------------------*/
+#tree_graph .node {
+  cursor: pointer; }
+  #tree_graph .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px; }
+  #tree_graph .node text {
+    font: 10px sans-serif; }
+
+#tree_graph .link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px; }

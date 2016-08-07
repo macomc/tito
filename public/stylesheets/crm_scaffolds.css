@@ -1,0 +1,57 @@
+/*--------------------*/
+/* Conversations      */
+/*--------------------*/
+.conversation .box {
+  border: 1px solid #cacaca;
+  padding: 1rem;
+  border-radius: 3px;
+}
+.conversation .columns.box.left {
+  background: #eee;
+}
+.conversation .columns.box.right {
+  background: #ecfaff;
+}
+.conversation .fecha {
+  position: relative;
+  left: 80%;
+}
+.conversation .row.message {
+  margin: 2px;
+}
+.conversation .fixed-bottom {
+  width: 90%;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  background: wheat;
+  padding: 5px;
+}
+.conversation .last-row {
+  margin-bottom: 70px;
+}
+.conversation .fixed {
+  width: 90%;
+  left: 5%;
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  background: white;
+}
+.conversation .first-row {
+  margin-top: 2px;
+}
+.conversation select {
+  margin-bottom: 0;
+}
+.conversation label.middle {
+  margin-bottom: 0;
+}
+.conversation .row.state {
+  margin-bottom: 4px;
+  margin-top: 4px;
+}
+.conversation input.column {
+  padding: 5px;
+  margin-right: 5px;
+}

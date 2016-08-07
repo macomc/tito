@@ -1,7 +1,27 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", type='text/css', href="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.css")
+    link(rel='stylesheet', type='text/css', href='/stylesheets/foundation-icons.css')
+    link(rel='stylesheet', type='text/css', href='//cdn.datatables.net/1.10.10/css/jquery.dataTables.css')
+    link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/r/dt-1.10.10/jqc-1.11.3,dt-1.10.10,b-1.1.0,se-1.1.0/datatables.min.css')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/scaffolds.css')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/crm_scaffolds.css')
+    block title
+      title Tito App
+    script(src='//code.jquery.com/jquery-1.11.3.min.js')
+    script(src="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.js")
+    script(type='text/javascript', charset='utf8', src='//cdn.datatables.net/1.10.10/js/jquery.dataTables.js')
+    script(type='text/javascript', src='https://cdn.datatables.net/r/dt-1.10.10/jqc-1.11.3,dt-1.10.10,b-1.1.0,se-1.1.0/datatables.min.js')
+    script(src='../../javascripts/modules/knockout/knockout-3.1.0.js')
+    block extra_script
+      script()
   body
-    block content
+          include ./nav_bar.jade
+          .body
+            .row
+              .large-12.medium-12.columns.page-content
+                block content
+          .footer
+            .row.text-center
+              | Bluewise Systems and Solutions &copy; 2005 - 2016
