@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var alumnos = require('../controllers/alumnos');
 var conferencias = require('../controllers/conferencias');
+var asistencias = require('../controllers/asistencias');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -50,4 +51,25 @@ router.get('/', function(req, res, next) {
   router.put('/api/v1/conferencias/:id', conferencias.update);
   router.delete('/api/v1/conferencias/:id', conferencias.delete);
 
+// ASISTENCIAS
+  //
+  // index
+  router.get('/asistencias', function(req, res, next) {
+    res.render('asistencias');
+  });
+// show
+  router.get('/asistencia/:id', function(req, res, next) {
+    res.render('asistencia');
+  });
+  // new/edit
+  router.get('/asistencia', function(req, res, next) {
+    res.render('asistencia');
+  });
+  // API calls to fill data
+  router.get('/api/v1/asistencias', asistencias.findAll);
+  router.get('/api/v1/asistencias/:id', asistencias.findById);
+  router.post('/api/v1/asistencias', asistencias.add);
+  router.put('/api/v1/asistencias/:id', asistencias.update);
+  router.delete('/api/v1/asistencias/:id', asistencias.delete);
+  
 module.exports = router;

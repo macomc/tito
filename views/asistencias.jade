@@ -1,0 +1,65 @@
+extends layout.jade
+
+block title
+  title Tito - Asistencias
+block extra_script
+  script.
+    $(document).ready(function() {
+      var oTable =   $('#table_id').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+          "url": "./api/v1/asistencias",
+          "type":"GET"
+        },
+        "dom": "<'row'<'small-6 columns'i><'small-6 columns'f>r>t<'row column'p>",
+        "autoWidth": false,
+        "columnDefs": [
+          { searchable: false, aTargets: [ -1, -2 ] },
+          { orderable: false, aTargets: [ -1, -2 ] }
+        ],
+        "columns": [
+          { "data": "codigo" },
+          { "data": "alumno" },
+          { "data": "conferencia" },
+          { "data": "cuando" },
+          { "data": "conferencia",
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+              $(nTd).html("<a class='editar button warning quickable' href='asistencia/?id="+oData.codigo+"'><i class='fi-pencil'/></a>");
+            }
+          },
+          { "data": "conferencia",
+            "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+              $(nTd).html("<a class='eliminar button alert quickable' href='./api/v1/asistencias/"+oData.codigo+"'><i class='fi-minus'/></a>");
+            }
+          }
+        ]
+        });
+      $('#table_id').on('click', '.eliminar', function (e) {
+        e.preventDefault();
+        if (confirm("Esta seguro de eliminar? ")) {
+          $.ajax({
+            method: "DELETE",
+            url: this
+          })
+          .done(function( msg ) {
+            alert( "Data deleted" + msg );
+          });
+        }
+        window.location.replace("/conferencias");
+      });
+    });
+block content
+  h2.h-header Asistencias
+  a.button.quickable(href='asistencia') 
+    i.fi-plus
+    |  Nuevo
+  table#table_id.display
+    thead
+      tr
+        th Codigo
+        th Alumno
+        th Conferencia
+        th Cuando
+        th
+        th
