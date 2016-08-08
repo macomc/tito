@@ -4,76 +4,103 @@ block title
   title Tito - Asistencia
 block extra_script
   script.
-    $( document ).ready(function() {
-      var mode = "CREATE";
-      function getURLParameter(name) {
-        return decodeURI(
-          (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
-        );
-      }
-      var id = getURLParameter("id");
-      if (id == 'null' || id.length === 0) {
-      } else {
-        mode = "UPDATE";
-        $("#donebtn").html('Guardar');
-        $.ajax({
-          method: "GET",
-          url: "../api/v1/asistencias/:"+id,
-          success : function(text) {
-            $("input[name='codigo_alumno']").val(text[0]['codigo_alumno']);
-            $("input[name='codigo_conferencia']").val(text[0]['codigo_conferencia']);
-          }
-        });
-      }
-      $("#myform").submit(function(e){
-        var serializedData = $(this).serialize();
-        console.log(serializedData);
-        if (mode == "CREATE") {
-          $.ajax({
-            method: "POST",
-            url: "../api/v1/asistencias",
-            data: serializedData,
-            success : function() {
-              window.location.replace("asistencias");
-            },
-            fail: function() {
-              window.location.replace("asistencias");
-            }
-          });
-        } else {
-          request = $.ajax({
-            method: "PUT",
-            url: "../api/v1/asistencias/"+id,
-            data: serializedData,
-            success : function() {
-              window.location.replace("../asistencias");
-            },
-            fail: function() {
-              window.location.replace("../asistencias");
-            }
-          });
-        };
-        e.preventDefault();
-      });
-    });
-block content
-  h2.h-header Detalle de la Asistencia
-  form#myform(name='myform', action='/api/v1/asistencias', method='post', data-abide="true", )
-    .alert.callout(data-abide-error="true", style="display: none;")
-      p
-        i.fi-alert
-        | Hay errores en los datos
-    .row
-      .small-6.columns
-        label
-          | Codigo Alumno
-          input(name='codigo_alumno', type='text', required="true")
-    .row
-      .small-6.columns
-        label
-          | Codigo Conferencia
-          input(name='codigo_conferencia', type='text')
+    function Conferencia(id, nombre) {
+        var self = this;
+        self.codigo = id;
+        self.name = ko.observable(nombre);
+    }
 
-  br
-  button#donebtn(type='submit', form='myform', value='Submit') AGREGAR
-  br
+    function Alumno(id, nombre) {
+        var self = this;
+        self.codigo = id;
+        self.name = ko.observable(nombre);
+    }
+
+    function AppViewModel() {
+        var self = this;
+        self.conferencias = ko.observableArray();   
+        self.conferencia = ko.observable("");
+        self.carnet = ko.observable("");
+        self.nombreAlumno= ko.observable("");
+        self.idAlumno= ko.observable(-1);
+
+        self.carnet.focused = ko.observable();
+
+        self.carnet.focused.subscribe(function(newValue) {
+            if (!newValue && self.carnet().length>0) {
+                console.log("ON EXIT"+self.carnet());
+                $.ajax({ method: "GET",
+                            url: "/api/v1/alumnos-carnet/"+self.carnet(),
+                            success : function(alumnos)
+                            {
+                                console.log(alumnos);
+                                if (alumnos.length>0) {
+                                    var alumno = alumnos[0];
+                                    self.idAlumno(alumno.codigo)
+                                    self.nombreAlumno(alumno.name);
+                                    if (self.conferencia()) {
+                                        var data = {codigo_alumno: alumno.codigo, codigo_conferencia:self.conferencia().codigo}
+                                        console.log(data);
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "/api/v1/asistencia",
+                                            data: data,
+                                            success : function(result) {
+                                                console.log("success ");
+                                                
+                                            },
+                                            fail: function() {
+                                              console.log("fail");
+                                            }
+                                        });
+                                    }
+                                }
+                                
+
+                            },
+                            fail: function(faild) {
+                                console.log("fail");
+                                console.log(faild);
+                            }
+                        });
+            }
+        });
+
+        $.ajax({ method: "GET",
+            url: "/api/v1/conferencias/",
+            success : function(conferencias)
+            {
+                console.log(conferencias);
+                $.each(conferencias.data, function(index, conf) {
+                    var c = new Conferencia(conf.codigo, conf.name);
+                    self.conferencias.push(c);
+                });
+
+            },
+            fail: function(faild) {
+                console.log("fail");
+                console.log(faild);
+            }
+        });
+    }
+
+    $(function () {
+    // Activates knockout.js
+        ko.applyBindings(new AppViewModel());
+    });
+    
+block content
+  h2.h-header Asistencia
+    .form
+        .small-3.columns
+            label.text-right.middle Conferencia
+        .small-9.columns
+            select#middle-label(data-bind="options: conferencias, optionsText: 'name', value: conferencia, optionsCaption: 'Seleccionar...' ")
+
+        .small-3.columns
+            label.text-right.middle Carnet
+        .small-9.columns
+              input(type='text', placeholder='Carnet', data-bind='value:carnet, hasfocus: carnet.focused')
+        .small-12.columns
+            label.text-left(data-bind='text:nombreAlumno')
+  

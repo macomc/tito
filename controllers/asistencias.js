@@ -42,6 +42,7 @@ exports.findAll = function(req, res) {
       }
       // SQL Query > Select Data
       var queryCount = client.query("select count(*) as num from asistencias ");
+      var queryCount = client.query("select count(*) as num from alumnos ");
       var queryFilteredCount = client.query(filteredQuery);
       var query = client.query(queryString);
 
