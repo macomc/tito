@@ -117,9 +117,9 @@ exports.add = function(req, res) {
 		}
 		console.log("ENTRO A ADD ANTES DE QUERY");
 		console.log(req.body);
-			client.query("INSERT INTO alumnos(name, carnet, email, telefono)"+
-				"values($1, $2, $3, $4)",
-				[ req.body.name, req.body.carnet, req.body.email, req.body.telefono], function(err, result) {
+			client.query("INSERT INTO asistencias(codigo_alumno, codigo_conferencia)"+
+				"values($1, $2)",
+				[ req.body.codigo_alumno, req.body.codigo_conferencia], function(err, result) {
 				if (err) {
 		console.log("error");
 					console.log(err);
@@ -178,40 +178,3 @@ exports.delete = function(req, res) {
 };
 
 
-exports.findByCarnet = function(req, res) {
-  var results = [];
-  console.log("find by carnet")
-  //var carnet = req.params.id.substring(1,req.params.id.length);
-  var id = req.params.id;
-  console.log("findbycarnet "+id);
-  req.pg.connect(req.db_string_con, function(err, client, done) {
-    // Handle connection errors
-    if(err) {
-      done();
-      console.log(err);
-      return res.status(500).json({ success: false, data: err});
-    }
-
-    // SQL Query > Select Data
-    var query = client.query("SELECT * " +
-      " FROM alumnos where carnet=($1)",[id]);
-
-    //HANDLE ERRORS
-    query.on('error', function() {
-		console.log("Entro a error ");
-      done();
-      return res.sendStatus(500);
-    });
-
-    // Stream results back one row at a time
-    query.on('row', function(row) {
-      results.push(row);
-    });
-
-    // After all data is returned, close connection and return results
-    query.on('end', function() {
-      done();
-      return res.json(results);
-    });
-  });
-};

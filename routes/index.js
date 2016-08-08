@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var alumnos = require('../controllers/alumnos');
 var conferencias = require('../controllers/conferencias');
+var asistencias = require('../controllers/asistencias');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,6 +29,7 @@ router.get('/', function(req, res, next) {
   router.post('/api/v1/alumnos', alumnos.add);
   router.put('/api/v1/alumnos/:id', alumnos.update);
   router.delete('/api/v1/alumnos/:id', alumnos.delete);
+  router.get('/api/v1/alumnos-carnet/:id', alumnos.findByCarnet);
   
   // CONFERENCIAS
   //
@@ -49,5 +51,13 @@ router.get('/', function(req, res, next) {
   router.post('/api/v1/conferencias', conferencias.add);
   router.put('/api/v1/conferencias/:id', conferencias.update);
   router.delete('/api/v1/conferencias/:id', conferencias.delete);
+  
+  
+  // new/edit
+    router.post('/api/v1/asistencia', asistencias.add);
+    
+  router.get('/asistencia', function(req, res, next) {
+    res.render('asistencia');
+  });
 
 module.exports = router;

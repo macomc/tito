@@ -1,0 +1,106 @@
+extends layout.jade
+
+block title
+  title Tito - Asistencia
+block extra_script
+  script.
+    function Conferencia(id, nombre) {
+        var self = this;
+        self.codigo = id;
+        self.name = ko.observable(nombre);
+    }
+
+    function Alumno(id, nombre) {
+        var self = this;
+        self.codigo = id;
+        self.name = ko.observable(nombre);
+    }
+
+    function AppViewModel() {
+        var self = this;
+        self.conferencias = ko.observableArray();   
+        self.conferencia = ko.observable("");
+        self.carnet = ko.observable("");
+        self.nombreAlumno= ko.observable("");
+        self.idAlumno= ko.observable(-1);
+
+        self.carnet.focused = ko.observable();
+
+        self.carnet.focused.subscribe(function(newValue) {
+            if (!newValue && self.carnet().length>0) {
+                console.log("ON EXIT"+self.carnet());
+                $.ajax({ method: "GET",
+                            url: "/api/v1/alumnos-carnet/"+self.carnet(),
+                            success : function(alumnos)
+                            {
+                                console.log(alumnos);
+                                if (alumnos.length>0) {
+                                    var alumno = alumnos[0];
+                                    self.idAlumno(alumno.codigo)
+                                    self.nombreAlumno(alumno.name);
+                                    if (self.conferencia()) {
+                                        var data = {codigo_alumno: alumno.codigo, codigo_conferencia:self.conferencia().codigo}
+                                        console.log(data);
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "/api/v1/asistencia",
+                                            data: data,
+                                            success : function(result) {
+                                                console.log("success ");
+                                                
+                                            },
+                                            fail: function() {
+                                              console.log("fail");
+                                            }
+                                        });
+                                    }
+                                }
+                                
+
+                            },
+                            fail: function(faild) {
+                                console.log("fail");
+                                console.log(faild);
+                            }
+                        });
+            }
+        });
+
+        $.ajax({ method: "GET",
+            url: "/api/v1/conferencias/",
+            success : function(conferencias)
+            {
+                console.log(conferencias);
+                $.each(conferencias.data, function(index, conf) {
+                    var c = new Conferencia(conf.codigo, conf.name);
+                    self.conferencias.push(c);
+                });
+
+            },
+            fail: function(faild) {
+                console.log("fail");
+                console.log(faild);
+            }
+        });
+    }
+
+    $(function () {
+    // Activates knockout.js
+        ko.applyBindings(new AppViewModel());
+    });
+    
+block content
+  h2.h-header Asistencia
+    .form
+        .small-3.columns
+            label.text-right.middle Conferencia
+        .small-9.columns
+            select#middle-label(data-bind="options: conferencias, optionsText: 'name', value: conferencia, optionsCaption: 'Seleccionar...' ")
+
+        .small-3.columns
+            label.text-right.middle Carnet
+        .small-9.columns
+              input(type='text', placeholder='Carnet', data-bind='value:carnet, hasfocus: carnet.focused')
+        .small-12.columns
+            label.text-left(data-bind='text:nombreAlumno')
+  
