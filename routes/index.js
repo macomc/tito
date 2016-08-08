@@ -1,23 +1,53 @@
 var express = require('express');
 var router = express.Router();
 var alumnos = require('../controllers/alumnos');
+var conferencias = require('../controllers/conferencias');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'TITO' });
 });
 
-  // CONTACTS
+  // ALUMNOS
   //
   // index
   router.get('/alumnos', function(req, res, next) {
     res.render('alumnos');
   });
-// API calls to fill data
+// show
+  router.get('/alumno/:id', function(req, res, next) {
+    res.render('alumno');
+  });
+  // new/edit
+  router.get('/alumno', function(req, res, next) {
+    res.render('alumno');
+  });
+  // API calls to fill data
   router.get('/api/v1/alumnos', alumnos.findAll);
   router.get('/api/v1/alumnos/:id', alumnos.findById);
   router.post('/api/v1/alumnos', alumnos.add);
   router.put('/api/v1/alumnos/:id', alumnos.update);
   router.delete('/api/v1/alumnos/:id', alumnos.delete);
+  
+  // CONFERENCIAS
+  //
+  // index
+  router.get('/conferencias', function(req, res, next) {
+    res.render('conferencias');
+  });
+// show
+  router.get('/conferencia/:id', function(req, res, next) {
+    res.render('conferencia');
+  });
+  // new/edit
+  router.get('/conferencia', function(req, res, next) {
+    res.render('conferencia');
+  });
+  // API calls to fill data
+  router.get('/api/v1/conferencias', conferencias.findAll);
+  router.get('/api/v1/conferencias/:id', conferencias.findById);
+  router.post('/api/v1/conferencias', conferencias.add);
+  router.put('/api/v1/conferencias/:id', conferencias.update);
+  router.delete('/api/v1/conferencias/:id', conferencias.delete);
 
 module.exports = router;

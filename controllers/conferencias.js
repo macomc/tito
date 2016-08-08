@@ -13,10 +13,9 @@ exports.findAll = function(req, res) {
     }
 
       var filteredQuery = "SELECT count(*) as num " +
-        " FROM alumnos ";
-            var queryString = "SELECT codigo , coalesce(name, '') as name ,coalesce(carnet,'') as carnet ," +
-                    "coalesce(email,'') as email, coalesce(telefono,'') as telefono " +
-                    " from alumnos ";
+        " FROM conferencias ";
+            var queryString = "SELECT codigo , coalesce(name, '') as name  " +
+                    " from conferencias ";
 					/*
       if ( typeof req.query.search !== "undefined") {
 		  console.log("VALUE: "+req.query.search.value.toUpperCase());
@@ -39,7 +38,7 @@ exports.findAll = function(req, res) {
         queryString += " offset " + req.query.start;
       }
       // SQL Query > Select Data
-      var queryCount = client.query("select count(*) as num from alumnos ");
+      var queryCount = client.query("select count(*) as num from conferencias ");
       var queryFilteredCount = client.query(filteredQuery);
       var query = client.query(queryString);
 
@@ -85,7 +84,7 @@ exports.findById = function(req, res) {
 
     // SQL Query > Select Data
     var query = client.query("SELECT * " +
-      " FROM alumnos where codigo=($1)",[id]);
+      " FROM conferencias where codigo=($1)",[id]);
 
     //HANDLE ERRORS
     query.on('error', function() {
@@ -117,9 +116,9 @@ exports.add = function(req, res) {
 		}
 		console.log("ENTRO A ADD ANTES DE QUERY");
 		console.log(req.body);
-			client.query("INSERT INTO alumnos(name, carnet, email, telefono)"+
-				"values($1, $2, $3, $4)",
-				[ req.body.name, req.body.carnet, req.body.email, req.body.telefono], function(err, result) {
+			client.query("INSERT INTO conferencias(name)"+
+				"values($1)",
+				[ req.body.name], function(err, result) {
 				if (err) {
 		console.log("error");
 					console.log(err);
@@ -142,8 +141,8 @@ exports.update = function(req, res) {
 			return res.status(500).send(json({ success: false, data: err}));
 		}
 		// SQL Query > Update Data after getting the user
-		client.query("UPDATE alumnos SET name=($1), carnet=($2), email=($3), telefono=($4) WHERE codigo=($5)",
-			[req.body.name, req.body.carnet, req.body.email, req.body.telefono, req.params.id], function(err, result) {
+		client.query("UPDATE conferencias SET name=($1) WHERE codigo=($2)",
+			[req.body.name, req.params.id], function(err, result) {
 			if (err) {
 				console.log(err);
 				return res.status(500).json({success: false, data: err});
@@ -165,7 +164,7 @@ exports.delete = function(req, res) {
 		}
 
 		// SQL Query > Delete Data
-		client.query("DELETE FROM alumnos WHERE codigo=($1)", [req.params.id], function(err, result) {
+		client.query("DELETE FROM conferencias WHERE codigo=($1)", [req.params.id], function(err, result) {
 			if (err) {
 				console.log(err);
 				return res.status(500).json({success: false, data: err});

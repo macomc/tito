@@ -1,0 +1,72 @@
+extends layout.jade
+
+block title
+  title Tito - Conferencia
+block extra_script
+  script.
+    $( document ).ready(function() {
+      var mode = "CREATE";
+      function getURLParameter(name) {
+        return decodeURI(
+          (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
+      }
+      var id = getURLParameter("id");
+      if (id == 'null' || id.length === 0) {
+      } else {
+        mode = "UPDATE";
+        $("#donebtn").html('Guardar');
+        $.ajax({
+          method: "GET",
+          url: "../api/v1/conferencias/:"+id,
+          success : function(text) {
+            $("input[name='name']").val(text[0]['name']);
+          }
+        });
+      }
+      $("#myform").submit(function(e){
+        var serializedData = $(this).serialize();
+        console.log(serializedData);
+        if (mode == "CREATE") {
+          $.ajax({
+            method: "POST",
+            url: "../api/v1/conferencias",
+            data: serializedData,
+            success : function() {
+              window.location.replace("conferencias");
+            },
+            fail: function() {
+              window.location.replace("conferencias");
+            }
+          });
+        } else {
+          request = $.ajax({
+            method: "PUT",
+            url: "../api/v1/conferencias/"+id,
+            data: serializedData,
+            success : function() {
+              window.location.replace("../conferencias");
+            },
+            fail: function() {
+              window.location.replace("../conferencias");
+            }
+          });
+        };
+        e.preventDefault();
+      });
+    });
+block content
+  h2.h-header Detalle de la Conferencia
+  form#myform(name='myform', action='/api/v1/conferencias', method='post', data-abide="true", )
+    .alert.callout(data-abide-error="true", style="display: none;")
+      p
+        i.fi-alert
+        | Hay errores en los datos
+    .row
+      .small-6.columns
+        label
+          | Nombre
+          input(name='name', type='text', required="true")
+  br
+  button#donebtn(type='submit', form='myform', value='Submit') AGREGAR
+  br

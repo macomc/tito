@@ -1,7 +1,7 @@
 extends layout.jade
 
 block title
-  title Tito - Alumnos
+  title Tito - Conferencias
 block extra_script
   script.
     $(document).ready(function() {
@@ -9,7 +9,7 @@ block extra_script
         "processing": true,
         "serverSide": true,
         "ajax": {
-          "url": "./api/v1/alumnos",
+          "url": "./api/v1/conferencias",
           "type":"GET"
         },
         "dom": "<'row'<'small-6 columns'i><'small-6 columns'f>r>t<'row column'p>",
@@ -21,17 +21,14 @@ block extra_script
         "columns": [
           { "data": "codigo" },
           { "data": "name" },
-          { "data": "carnet" },
-          { "data": "email" },
-          { "data": "telefono" },
-          { "data": "telefono",
+          { "data": "name",
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-              $(nTd).html("<a class='editar button warning quickable' href='alumno/?id="+oData.codigo+"'><i class='fi-pencil'/></a>");
+              $(nTd).html("<a class='editar button warning quickable' href='conferencia/?id="+oData.codigo+"'><i class='fi-pencil'/></a>");
             }
           },
-          { "data": "telefono",
+          { "data": "name",
             "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-              $(nTd).html("<a class='eliminar button alert quickable' href='./api/v1/alumnos/"+oData.codigo+"'><i class='fi-minus'/></a>");
+              $(nTd).html("<a class='eliminar button alert quickable' href='./api/v1/conferencias/"+oData.codigo+"'><i class='fi-minus'/></a>");
             }
           }
         ]
@@ -47,12 +44,12 @@ block extra_script
             alert( "Data deleted" + msg );
           });
         }
-        window.location.replace("/alumnos");
+        window.location.replace("/conferencias");
       });
     });
 block content
-  h2.h-header Alumnos
-  a.button.quickable(href='alumno') 
+  h2.h-header Conferencias
+  a.button.quickable(href='conferencia') 
     i.fi-plus
     |  Nuevo
   table#table_id.display
@@ -60,8 +57,5 @@ block content
       tr
         th Codigo
         th Nombre
-        th Carnet
-        th Telefno
-        th Email
         th
         th

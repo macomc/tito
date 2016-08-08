@@ -1,0 +1,90 @@
+extends layout.jade
+
+block title
+  title Tito - Alumno
+block extra_script
+  script.
+    $( document ).ready(function() {
+      var mode = "CREATE";
+      function getURLParameter(name) {
+        return decodeURI(
+          (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
+      }
+      var id = getURLParameter("id");
+      if (id == 'null' || id.length === 0) {
+      } else {
+        mode = "UPDATE";
+        $("#donebtn").html('Guardar');
+        $.ajax({
+          method: "GET",
+          url: "../api/v1/alumnos/:"+id,
+          success : function(text) {
+            $("input[name='name']").val(text[0]['name']);
+            $("input[name='carnet']").val(text[0]['carnet']);
+            $("input[name='telefono']").val(text[0]['telefono']);
+            $("input[name='email']").val(text[0]['email']);
+          }
+        });
+      }
+      $("#myform").submit(function(e){
+        var serializedData = $(this).serialize();
+        console.log(serializedData);
+        if (mode == "CREATE") {
+          $.ajax({
+            method: "POST",
+            url: "../api/v1/alumnos",
+            data: serializedData,
+            success : function() {
+              window.location.replace("alumnos");
+            },
+            fail: function() {
+              window.location.replace("alumnos");
+            }
+          });
+        } else {
+          request = $.ajax({
+            method: "PUT",
+            url: "../api/v1/alumnos/"+id,
+            data: serializedData,
+            success : function() {
+              window.location.replace("../alumnos");
+            },
+            fail: function() {
+              window.location.replace("../alumnos");
+            }
+          });
+        };
+        e.preventDefault();
+      });
+    });
+block content
+  h2.h-header Detalle del Alumno
+  form#myform(name='myform', action='/api/v1/alumnos', method='post', data-abide="true", )
+    .alert.callout(data-abide-error="true", style="display: none;")
+      p
+        i.fi-alert
+        | Hay errores en los datos
+    .row
+      .small-6.columns
+        label
+          | Nombre
+          input(name='name', type='text', required="true")
+    .row
+      .small-6.columns
+        label
+          | Carnet
+          input(name='carnet', type='text')
+    .row
+      .small-6.columns
+        label
+          | Email
+          input(name='email', type='text')
+    .row
+      .small-6.columns
+        label
+          | Telefono
+          input(name='telefono', type='text')
+  br
+  button#donebtn(type='submit', form='myform', value='Submit') AGREGAR
+  br
